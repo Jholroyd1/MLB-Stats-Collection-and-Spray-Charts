@@ -76,6 +76,16 @@ The interactive version uses the same Statcast transformation and field geometry
 - See the `scripts/` directory for more examples (e.g., Ohtani/Harper spray charts).
 - Example outputs are in `data/`.
 
+### Example Spray Charts
+The `examples/` folder contains sample spray chart PNGs generated for several players for the 2025 season (regular and postseason, if available):
+
+- Bryce Harper
+- Michael Busch
+- Jose Altuve
+- Brandon Nimmo
+
+These PNGs were created using the static spray chart script and can be used as references for output style and script usage. To generate your own, see the instructions above for the static and interactive chart scripts.
+
 ## Data Sources
 - MLB Stats API via [MLB-StatsAPI](https://github.com/toddrob99/MLB-StatsAPI)
 
