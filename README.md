@@ -37,9 +37,16 @@ MLB_Stats/
 	```
 
 ## Data Collection Workflow
-- Use `scripts/collect_mlb_data.py` to fetch game, player, and box score data.
-- Use `scripts/collect_all_play_by_play.py` to fetch play-by-play data for all games.
-- All data is stored in `data/mlb_data.db` (SQLite).
+The typical workflow for collecting and ensuring complete MLB data is:
+
+1. Use `scripts/collect_mlb_data.py` to fetch game, player, and box score data.
+2. Use `scripts/collect_all_play_by_play.py` to fetch play-by-play data for all games.
+3. **(Recommended for completeness)** Run the backfill scripts to fill in any missing or incomplete data:
+	- `scripts/backfill_missing_boxscores.py` — Fills in missing box score data for games that may have been skipped or failed during initial collection.
+	- `scripts/backfill_missing_playbyplay.py` — Fills in missing play-by-play data for games with incomplete or missing event logs.
+	- `scripts/backfill_players.py` — Ensures all player information is up to date and fills in any missing player records.
+
+All data is stored in `data/mlb_data.db` (SQLite).
 
 ## Database Schema
 See `schema.sql` for full details. Main tables:
