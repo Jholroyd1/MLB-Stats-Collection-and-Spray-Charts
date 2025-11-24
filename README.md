@@ -58,11 +58,19 @@ See `schema.sql` for full details. Main tables:
 - **play_by_play** - Game events and plays
 
 ## Spray Chart Creation
-Use `scripts/spray_chart_by_player_and_date.py` to generate a spray chart for any player and date range:
+
+You can generate spray charts for any player and date range in two ways:
+
+**1. Static PNG (matplotlib):**
 ```bash
 python scripts/spray_chart_by_player_and_date.py --player "Bryce Harper" --start 2025-04-01 --end 2025-09-30 --output harper_spray_chart.png
 ```
-Output can be PNG (static) or shown interactively.
+
+**2. Interactive HTML (Plotly, Statcast-accurate):**
+```bash
+python scripts/spray_chart_by_player_and_date_interactive.py --player "Bryce Harper" --start 2025-04-01 --end 2025-09-30 --output harper_2025_spray_chart_interactive.html
+```
+The interactive version uses the same Statcast transformation and field geometry as the original Harper example, and is recommended for web or presentation use.
 
 ## Example Usage
 - See the `scripts/` directory for more examples (e.g., Ohtani/Harper spray charts).
