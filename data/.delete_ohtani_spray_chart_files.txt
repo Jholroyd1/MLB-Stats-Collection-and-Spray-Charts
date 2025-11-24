@@ -1,0 +1,6 @@
+delete: ohtani_2025_spray_chart.csv
+delete: ohtani_2025_spray_chart.png
+delete: ohtani_2025_spray_chart_distance.png
+delete: ohtani_2025_spray_chart_field.png
+delete: ohtani_2025_spray_chart_real_field.png
+delete: ohtani_2025_spray_chart_with_distance.csv

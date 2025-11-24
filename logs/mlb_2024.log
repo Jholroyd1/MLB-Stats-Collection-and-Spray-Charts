@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/Users/jackholroyd/MLB_Stats/scripts/get_all_games_stats.py", line 519, in <module>
+    main()
+    ~~~~^^
+  File "/Users/jackholroyd/MLB_Stats/scripts/get_all_games_stats.py", line 504, in main
+    conn = sqlite3.connect(DB_PATH, timeout=30.0)
+sqlite3.OperationalError: unable to open database file
