@@ -59,7 +59,9 @@ See `schema.sql` for full details. Main tables:
 
 ## Spray Chart Creation
 
-You can generate spray charts for any player and date range in two ways:
+
+You can generate spray charts for any player and date range, with optional filtering by batted ball outcome (event type), in two ways:
+
 
 **1. Static PNG (matplotlib):**
 ```bash
@@ -71,6 +73,18 @@ python scripts/spray_chart_by_player_and_date.py --player "Bryce Harper" --start
 python scripts/spray_chart_by_player_and_date_interactive.py --player "Bryce Harper" --start 2025-04-01 --end 2025-09-30 --output harper_2025_spray_chart_interactive.html
 ```
 The interactive version uses the same Statcast transformation and field geometry as the original Harper example, and is recommended for web or presentation use.
+
+### Filtering by Outcome (Event Type)
+Both scripts support filtering by batted ball outcome/event type using the `--outcome` argument. For example, to generate a spray chart of only home runs:
+
+```bash
+# Static PNG (only home runs)
+python scripts/spray_chart_by_player_and_date.py --player "Bryce Harper" --start 2025-04-01 --end 2025-09-30 --outcome home_run --output harper_2025_homeruns.png
+
+# Interactive HTML (only home runs)
+python scripts/spray_chart_by_player_and_date_interactive.py --player "Bryce Harper" --start 2025-04-01 --end 2025-09-30 --outcome home_run --output harper_2025_homeruns.html
+```
+Event type names are case-insensitive but must match the database values (e.g., `home_run`, `single`, `double`, `out`, etc.).
 
 ## Example Usage
 - See the `scripts/` directory for more examples (e.g., Ohtani/Harper spray charts).

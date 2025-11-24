@@ -86,6 +86,7 @@ def main():
     parser.add_argument('--end', required=True, help='End date (YYYY-MM-DD)')
     parser.add_argument('--output', default=None, help='Output PNG or HTML file (optional)')
     parser.add_argument('--html', action='store_true', help='If set, output an interactive HTML spray chart (Plotly)')
+    parser.add_argument('--outcome', default=None, help='Filter by batted ball outcome/event type (e.g., Home Run, Single, Out, etc.)')
     args = parser.parse_args()
 
     # Validate dates
@@ -99,6 +100,8 @@ def main():
     conn = sqlite3.connect(DB_PATH)
     player_id, player_name = get_player_id(conn, args.player)
     df = query_batted_balls(conn, player_id, args.start, args.end)
+    if args.outcome:
+        df = df[df['event_type'].str.lower() == args.outcome.strip().lower()]
     conn.close()
 
     if df.empty:
