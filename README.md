@@ -1,4 +1,4 @@
-# MLB-Stats-Collection-and-Spray-Charts
+# MLB Data Collection & Spray Chart Project
 
 This project provides a complete workflow for collecting MLB data (play-by-play, box scores, player info) and generating spray charts for any player and date range. It is designed for reproducibility, extensibility, and clarity, with all scripts, schema, and documentation included.
 
@@ -37,71 +37,40 @@ MLB_Stats/
 	```
 
 ## Data Collection Workflow
-The typical workflow for collecting and ensuring complete MLB data is:
-
-1. Use `scripts/collect_mlb_data.py` to fetch game, player, and box score data.
-2. Use `scripts/collect_all_play_by_play.py` to fetch play-by-play data for all games.
-3. **(Recommended for completeness)** Run the backfill scripts to fill in any missing or incomplete data:
-	- `scripts/backfill_missing_boxscores.py` — Fills in missing box score data for games that may have been skipped or failed during initial collection.
-	- `scripts/backfill_missing_playbyplay.py` — Fills in missing play-by-play data for games with incomplete or missing event logs.
-	- `scripts/backfill_players.py` — Ensures all player information is up to date and fills in any missing player records.
-
-All data is stored in `data/mlb_data.db` (SQLite).
+- Use `scripts/collect_mlb_data.py` to fetch game, player, and box score data.
+- Use `scripts/collect_all_play_by_play.py` to fetch play-by-play data for all games.
+- All data is stored in `data/mlb_data.db` (SQLite).
 
 ## Database Schema
 See `schema.sql` for full details. Main tables:
-- **games** - Game results, scores, venue, weather
-- **box_scores_batting** - Batting statistics by player/game
-- **box_scores_pitching** - Pitching statistics by player/game
-- **teams** - Team information
-- **players** - Player information
-- **play_by_play** - Game events and plays
+- `games`, `players`, `teams`, `box_scores_batting`, `box_scores_pitching`, `play_by_play`
 
 ## Spray Chart Creation
+- Use `scripts/spray_chart_by_player_and_date.py` to generate a spray chart for any player and date range:
+  ```bash
+  python scripts/spray_chart_by_player_and_date.py --player "Bryce Harper" --start 2025-04-01 --end 2025-09-30 --output harper_spray_chart.png
+  ```
+- Output can be PNG (static) or shown interactively.
 
 
-You can generate spray charts for any player and date range, with optional filtering by batted ball outcome (event type), in two ways:
+## Modeling & Data Analysis
 
+The project includes a Jupyter notebook for data exploration, feature engineering, and predictive modeling:
 
-**1. Static PNG (matplotlib):**
-```bash
-python scripts/spray_chart_by_player_and_date.py --player "Bryce Harper" --start 2025-04-01 --end 2025-09-30 --output harper_spray_chart.png
-```
+- **MLB_Player_Data_Analysis.ipynb**: This notebook demonstrates how to load, clean, and explore batted ball data, visualize key features, and build a machine learning model (e.g., Random Forest) to predict hit outcomes. It covers:
+	- Data loading and cleaning
+	- Exploratory data analysis (EDA) and visualization
+	- Feature engineering and scaling
+	- Model training and evaluation
+	- Feature importance analysis
 
-**2. Interactive HTML (Plotly, Statcast-accurate):**
-```bash
-python scripts/spray_chart_by_player_and_date_interactive.py --player "Bryce Harper" --start 2025-04-01 --end 2025-09-30 --output harper_2025_spray_chart_interactive.html
-```
-The interactive version uses the same Statcast transformation and field geometry as the original Harper example, and is recommended for web or presentation use.
+You can use this notebook as a template for your own analysis or as a starting point for interview projects and further research. See the notebook for detailed, step-by-step code and explanations.
 
-### Filtering by Outcome (Event Type)
-Both scripts support filtering by batted ball outcome/event type using the `--outcome` argument. For example, to generate a spray chart of only home runs:
-
-```bash
-# Static PNG (only home runs)
-python scripts/spray_chart_by_player_and_date.py --player "Bryce Harper" --start 2025-04-01 --end 2025-09-30 --outcome home_run --output harper_2025_homeruns.png
-
-# Interactive HTML (only home runs)
-python scripts/spray_chart_by_player_and_date_interactive.py --player "Bryce Harper" --start 2025-04-01 --end 2025-09-30 --outcome home_run --output harper_2025_homeruns.html
-```
-Event type names are case-insensitive but must match the database values (e.g., `home_run`, `single`, `double`, `out`, etc.).
+---
 
 ## Example Usage
-- See the `scripts/` directory for more examples (e.g., Ohtani/Harper spray charts).
-- Example outputs are in `data/`.
-
-### Example Spray Charts
-The `examples/` folder contains sample spray chart PNGs generated for several players for the 2025 season (regular and postseason, if available):
-
-- Bryce Harper
-- Michael Busch
-- Jose Altuve
-- Brandon Nimmo
-
-These PNGs were created using the static spray chart script and can be used as references for output style and script usage. To generate your own, see the instructions above for the static and interactive chart scripts.
-
-## Data Sources
-- MLB Stats API via [MLB-StatsAPI](https://github.com/toddrob99/MLB-StatsAPI)
+See the `scripts/` directory for more examples (e.g., Ohtani/Harper spray charts).
+Example outputs are in `data/`.
 
 ## Contributing
 - Fork the repo, create a branch, and submit a pull request.
@@ -109,3 +78,18 @@ These PNGs were created using the static spray chart script and can be used as r
 
 ## License
 MIT
+python scripts/collect_mlb_data.py --season 2024
+```
+
+## Database Schema
+
+- **games** - Game results, scores, venue, weather
+- **box_scores_batting** - Batting statistics by player/game
+- **box_scores_pitching** - Pitching statistics by player/game
+- **teams** - Team information
+- **players** - Player information
+- **play_by_play** - Game events and plays
+
+## Data Sources
+
+- MLB Stats API via [MLB-StatsAPI](https://github.com/toddrob99/MLB-StatsAPI)
