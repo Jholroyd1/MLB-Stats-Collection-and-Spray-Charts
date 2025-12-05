@@ -76,6 +76,37 @@ Example outputs are in `data/`.
 - Fork the repo, create a branch, and submit a pull request.
 - Please document any new scripts or workflows in the README and/or `docs/`.
 
+## Sharing This Project
+
+There are several ways to share this GitHub project via email:
+
+### Option 1: Share the Repository Link
+Simply include the repository URL in your email:
+```
+https://github.com/Jholroyd1/MLB-Stats-Collection-and-Spray-Charts
+```
+
+### Option 2: Download and Attach as ZIP
+1. Click the green "Code" button on the GitHub repository page
+2. Select "Download ZIP"
+3. Attach the ZIP file to your email
+
+Note: The ZIP file will not include the git history or large database files (if `.gitignore` is configured).
+
+### Option 3: Share Clone Instructions
+Include these instructions in your email for recipients to clone the repository:
+```bash
+git clone https://github.com/Jholroyd1/MLB-Stats-Collection-and-Spray-Charts.git
+cd MLB-Stats-Collection-and-Spray-Charts
+```
+
+### Option 4: Create a Release
+For sharing a specific version:
+1. Go to the repository's "Releases" section on GitHub
+2. Create a new release with a version tag
+3. GitHub will automatically create downloadable ZIP and tar.gz archives
+4. Share the release URL or download and attach the archive
+
 ## License
 MIT
 python scripts/collect_mlb_data.py --season 2024
